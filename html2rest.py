@@ -20,6 +20,8 @@
 # THE SOFTWARE.
 #-----------------------------------------------------------------------------
 
+# Modified by Kenji Suzuki, 2011/10/07
+
 
 import sys
 import os
@@ -29,7 +31,7 @@ from sgmllib import SGMLParser
 from StringIO import StringIO
 from mbtextwrap import MBTextWrapper
 
-CODEBLOCK = '.. sourcecode:: php'
+CODEBLOCK = '::'
 BLOCKTAGS = ['div', 'blockquote']
 IGNORETAGS = ['title', 'style', 'script']
 UNDERLINES = list('#=~`+;')
@@ -183,7 +185,8 @@ class Parser(SGMLParser):
             self.writestartblock()
         elif tag == 'br':
             if self.verbatim:
-                self.data('\n')
+                #self.data('\n')
+                pass
             elif not self.inblock:
                 self.writeline()
             else:
@@ -221,7 +224,7 @@ class Parser(SGMLParser):
             self.data(' <%s>`' % self.link)
             self.link = None
 
-    def start_code(self, attrs):
+    def start_pre(self, attrs):
         if self.lists:
             self.end_li()
             self.writeline()
@@ -229,7 +232,7 @@ class Parser(SGMLParser):
         self.verbatim = True
         self.writeblock(CODEBLOCK)
 
-    def end_code(self):
+    def end_pre(self):
         sbuf = self.stringbuffer.getvalue()
         if sbuf:
             self.linebuffer.rawwrite(sbuf)
@@ -345,10 +348,22 @@ class Parser(SGMLParser):
         self.data('**')
 
     def start_code(self, attrs):
-        self.data(' `')
+        if self.lists:
+            self.end_li()
+            self.writeline()
+        #self.inblock += 1
+        self.verbatim = True
+        self.writeblock(CODEBLOCK)
 
     def end_code(self):
-        self.data('`')
+        sbuf = self.stringbuffer.getvalue()
+        if sbuf:
+            self.linebuffer.rawwrite(sbuf)
+            self.linebuffer.indent(4)
+        self.clear_stringbuffer()
+        self.writeendblock()
+        #self.inblock -= 1
+        self.verbatim = False
 
     def start_span(self, attrs):
         pass
