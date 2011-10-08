@@ -9,7 +9,7 @@ Setup Instructions
 There are tools to convert translated HTML CodeIgniter User Guide
 into Sphinx RST files.
 
-The tools are now developping.
+The tools are now under developping.
 
 How to Use
 ==============
