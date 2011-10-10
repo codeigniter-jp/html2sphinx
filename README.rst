@@ -9,10 +9,15 @@ Setup Instructions
 There are tools to convert translated HTML CodeIgniter User Guide
 into Sphinx RST files.
 
-The tools are now under developping.
+The tools are now under development.
+
+Before Converting
+=================
+
+Replace "&nbsp;" with space in HTML User Guide.
 
 How to Use
-==============
+==========
 
 Get repoistoies.
 
