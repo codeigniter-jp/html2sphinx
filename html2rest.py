@@ -216,12 +216,16 @@ class Parser(SGMLParser):
         href = dict(attrs).get('href', None)
         if not href or href.startswith('#'):
             return
+        if not href.startswith('http://') and not href.startswith('https://'):
+            p = re.compile('\.html$')
+            href = p.sub('', href)
+            self.data(' :doc:')
         self.data('`')
         self.link = href
 
     def end_a(self):
         if self.link:
-            self.data(' <%s>`' % self.link)
+            self.data(' <%s>` ' % self.link)
             self.link = None
 
     def start_pre(self, attrs):

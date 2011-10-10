@@ -37,11 +37,6 @@ foreach ($lines as $line) {
         //var_dump($m);
         $new_doc .= '.. note:: ' . $m[1];
       }
-      // `エラーの処理 <errors.html>`
-      else if (preg_match('/^(.*)`(.+)<(.+)\.html>`(.*)/', $line, $m)) { 
-        //var_dump($m);
-        $new_doc .= $m[1] . ':doc:`' . $m[2] . '<' . $m[3] . '>` ' . $m[4] ;
-      }
       else {
         $new_doc .= $line;
       }
