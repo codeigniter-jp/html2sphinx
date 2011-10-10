@@ -202,7 +202,7 @@ class Parser(SGMLParser):
                 linebuf = self.linebuffer
                 linebuf[-1] = linebuf[-1].strip()
                 char = UNDERLINES[int(tag[1])-1]
-                linebuf.write(char * len(linebuf[-1]))
+                linebuf.write(char * len(linebuf[-1]) * 2)
                 self.writeline()
         #elif tag in BLOCKTAGS and self.pending():
         #    if self.lists:
