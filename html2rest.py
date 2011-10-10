@@ -246,6 +246,34 @@ class Parser(SGMLParser):
         #self.inblock -= 1
         self.verbatim = False
 
+    def start_table(self, attrs):
+        self.verbatim = True
+
+    def end_table(self):
+        self.ignoredata = False
+        sbuf = self.stringbuffer.getvalue()
+        if sbuf:
+            self.linebuffer.rawwrite(sbuf)
+        self.clear_stringbuffer()
+        self.writeendblock()
+        self.verbatim = False
+
+    def start_tr(self, attrs):
+        self.ignoredata = True
+
+    def end_tr(self):
+        self.ignoredata = True
+
+    def start_th(self, attrs):
+        self.ignoredata = False
+
+    def start_td(self, attrs):
+        self.ignoredata = False
+        self.data(' ')
+
+    def end_td(self):
+        pass
+
     def start_ul(self, attrs):
         if self.lists:
             self.end_li()
