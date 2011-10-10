@@ -225,7 +225,10 @@ class Parser(SGMLParser):
 
     def end_a(self):
         if self.link:
-            self.data(' <%s>` ' % self.link)
+            if self.link.startswith('http://') or self.link.startswith('https://'):
+                self.data(' <%s>`_ ' % self.link)
+            else:
+                self.data(' <%s>` ' % self.link)
             self.link = None
 
     def start_pre(self, attrs):
