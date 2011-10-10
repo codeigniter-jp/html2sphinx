@@ -400,6 +400,19 @@ class Parser(SGMLParser):
         #self.inblock -= 1
         self.verbatim = False
 
+    def start_textarea(self, attrs):
+        self.verbatim = True
+        self.writeblock(CODEBLOCK)
+
+    def end_textarea(self):
+        sbuf = self.stringbuffer.getvalue()
+        if sbuf:
+            self.linebuffer.rawwrite(sbuf)
+            self.linebuffer.indent(4)
+        self.clear_stringbuffer()
+        self.writeendblock()
+        self.verbatim = False
+
     def start_span(self, attrs):
         pass
 
