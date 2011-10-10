@@ -219,8 +219,9 @@ class Parser(SGMLParser):
         if not href.startswith('http://') and not href.startswith('https://'):
             p = re.compile('\.html$')
             href = p.sub('', href)
-            self.data(' :doc:')
-        self.data('`')
+            self.data(' :doc:`')
+        else:
+            self.data(' `')
         self.link = href
 
     def end_a(self):
