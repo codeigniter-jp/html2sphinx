@@ -33,7 +33,7 @@ foreach ($lines as $line) {
       break;
     }
     else {
-      if (preg_match('/^Note: (.*)/', $line, $m)) {
+      if (preg_match('/^Note:\s(.*)/', $line, $m)) {
         //var_dump($m);
         $new_doc .= '.. note:: ' . $m[1];
       }
