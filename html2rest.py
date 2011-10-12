@@ -96,6 +96,14 @@ class LineBuffer(object):
             for i in range(start, n):
                 linebuf[i] = indent + linebuf[i]
 
+    def tab(self, num=1, start=0):
+        linebuf = self._lines
+        n = len(linebuf)
+        if n > start:
+            tab = '\t' * num
+            for i in range(start, n):
+                linebuf[i] = tab + linebuf[i]
+
     def lstrip(self):
         linebuf = self._lines
         for i in range(len(linebuf)):
@@ -122,7 +130,7 @@ class Parser(SGMLParser):
     def flush(self):
         if self.linebuffer:
             if self.inblock > 1:
-                indent = 4 * (self.inblock - 1)
+                indent = 3 * (self.inblock - 1)
                 self.linebuffer.indent(indent)
             self.writer.write(unescape(self.linebuffer.read()).encode(sys.getfilesystemencoding()))
             self.linebuffer.clear()
@@ -248,7 +256,7 @@ class Parser(SGMLParser):
         sbuf = self.stringbuffer.getvalue()
         if sbuf:
             self.linebuffer.rawwrite(sbuf)
-            self.linebuffer.indent(4)
+            self.linebuffer.tab(1)
         self.clear_stringbuffer()
         self.writeendblock()
         #self.inblock -= 1
@@ -343,7 +351,7 @@ class Parser(SGMLParser):
         self.flush_stringbuffer()
         linebuf = self.linebuffer
         if linebuf and linebuf[0] and linebuf[0].lstrip()[:2] in ['- ', '#.']:
-            start=1
+            start = 1
         else:
             # the start of the <li> has already been written, perhaps because
             # there was a <pre> block
@@ -399,7 +407,7 @@ class Parser(SGMLParser):
         sbuf = self.stringbuffer.getvalue()
         if sbuf:
             self.linebuffer.rawwrite(sbuf)
-            self.linebuffer.indent(4)
+            self.linebuffer.tab(1)
         self.clear_stringbuffer()
         self.writeendblock()
         #self.inblock -= 1
@@ -413,7 +421,7 @@ class Parser(SGMLParser):
         sbuf = self.stringbuffer.getvalue()
         if sbuf:
             self.linebuffer.rawwrite(sbuf)
-            self.linebuffer.indent(4)
+            self.linebuffer.tab(1)
         self.clear_stringbuffer()
         self.writeendblock()
         self.verbatim = False
