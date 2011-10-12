@@ -21,7 +21,7 @@ $in_list = FALSE;
 
 foreach ($lines as $line) {
   if ($state === 'head') {
-    if (preg_match('/' . $remove_before . '/', $line, $matches)) {
+    if (preg_match('/' . $remove_before . '/u', $line, $matches)) {
       //var_dump($matches);
       $state = 'after_head';
     }
@@ -33,20 +33,20 @@ foreach ($lines as $line) {
     }
   }
   else {  // content
-    if (preg_match('/' . $remove_after . '/', $line, $matches)) {
+    if (preg_match('/' . $remove_after . '/u', $line, $matches)) {
       break;
     }
     else {
-      if (preg_match('/^\s*Note:\s(.*)/', $line, $m)) {
+      if (preg_match('/^\s*Note:\s(.*)/u', $line, $m)) {
         //var_dump($m);
         $new_doc .= '.. note:: ' . $m[1];
       }
-      else if (preg_match('/^- (.+)/', $line, $m)) {
+      else if (preg_match('/^- (.+)/u', $line, $m)) {
         //var_dump($m);
         $new_doc .= '-  ' . $m[1] . "\n";
         $in_list = TRUE;
       }
-      else if (preg_match('/^   - (.+)/', $line, $m)) {
+      else if (preg_match('/^   - (.+)/u', $line, $m)) {
         //var_dump($m);
         $new_doc .= '   -  ' . $m[1] . "\n";
         $in_list = TRUE;
@@ -81,7 +81,7 @@ $new_doc = '';
 $header_not_processed = TRUE;
 
 foreach ($lines as $line) {
-  if ($header_not_processed && preg_match('/^###/', $line, $matches)) {
+  if ($header_not_processed && preg_match('/^###/u', $line, $matches)) {
     //var_dump($matches);
     $new_doc = $line . $new_doc . $line;
     $header_not_processed = FALSE;
