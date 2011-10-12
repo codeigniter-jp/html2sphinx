@@ -1,3 +1,5 @@
+#!/bin/sh
+
 for i in `cat FILES`; do
   file=`echo $i | sed -e "s/\.rst$//"`
   file="../../user_guide_ja/$file.html"
