@@ -9,8 +9,6 @@ Setup Instructions
 There are tools to convert translated HTML CodeIgniter User Guide
 into Sphinx RST files.
 
-The tools are now under development.
-
 Before Converting
 =================
 
@@ -59,3 +57,11 @@ You can get RST of tables.
 ::
 
 	$ php get_table.php path/to/html_user_guide/libraies/email.html
+
+Using Libraries
+===============
+
+Thanks.
+
+- https://bitbucket.org/djerdo/musette/
+- http://simplehtmldom.sourceforge.net/
