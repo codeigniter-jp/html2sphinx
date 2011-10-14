@@ -49,3 +49,12 @@ Convert HTML into RST.
 	$ sh convert.sh
 
 You can get Japanese RST files in "source" folder.
+
+Helper Script
+=============
+
+You can get RST of tables.
+
+::
+
+	$ php get_table.php path/to/html_user_guide/libraies/email.html
