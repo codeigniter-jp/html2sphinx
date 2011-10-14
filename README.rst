@@ -63,5 +63,5 @@ Using Libraries
 
 Thanks.
 
-- https://bitbucket.org/djerdo/musette/
-- http://simplehtmldom.sourceforge.net/
+- https://bitbucket.org/djerdo/musette/ (html2rest.py)
+- http://simplehtmldom.sourceforge.net/ (simple_html_dom.php)
