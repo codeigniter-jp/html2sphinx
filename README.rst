@@ -40,6 +40,7 @@ Copy the tools to "source" folder.
 ::
 
 	$ cp html2sphinx/* ci-ja/user_guide_ja_src/source/
+	$ rm ci-ja/user_guide_ja_src/source/README.rst
 
 Convert HTML into RST.
 
